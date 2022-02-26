@@ -47,6 +47,19 @@
   > --- Last checkpoint at:  标识刷新到磁盘的 LSN
   > ```
 
+####  刷盘策略
+
+```mysql
+--- 1: 事务提交时，必须调用一次 sync 操作(默认)
+--- 0: 事务提交时，不进行 sync 操作，仅在 master thread 中完成，每秒进行1次 sync 操作
+--- 2: 事务提交时，仅写入重做日志文件，未进行 sync 操作，由操作系统进行 sync
+```
+
+#### 双一策略
+
+- innodb_flush_log_at_trx_commit = 1
+- sync_binlog = 1
+
 #### 参考资料
 
 1. MySQL技术内幕-InnoDB存储引擎(第2版)-7.2.1节 姜承尧
